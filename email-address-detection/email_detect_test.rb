@@ -20,4 +20,11 @@ NRI Help Desk:", email_detector.text[0]
 NRI Help Desk:")
     assert_equal "customerservice@tnmbonline.com", email_detector.find_email
   end
+
+  def test_it_adds_semicolon_to_email_address
+    email_detector = EmailDetector.new("Customer Care team is at your service (10:00am to 5:30pm) & will address your concerns immediately. You can also email us at: customerservice@tnmbonline.com
+NRI Help Desk:")
+    email_detector.find_email
+    assert_equal "customerservice@tnmbonline.com;", email_detector.email_addresses.first
+  end
 end
